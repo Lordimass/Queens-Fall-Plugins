@@ -174,7 +174,10 @@ public class DialogueAsset implements JsonAssetWithMap<String, DefaultAssetMap<S
 
     /** Lazy DialogueAsset.CODEC work around so that the codec can be self-referential. */
     public static class LazyCodec implements Codec<DialogueAsset> {
-        public @NonNull Schema toSchema(@NonNull SchemaContext schemaContext) {return DialogueAsset.CODEC.toSchema(schemaContext);}
+        public @NonNull Schema toSchema(@NonNull SchemaContext schemaContext) {
+            return Schema.ref("common.json#/definitions/DialogueAsset");
+//            return DialogueAsset.CODEC.toSchema(schemaContext);
+        }
         public @Nullable DialogueAsset decode(BsonValue bsonValue, ExtraInfo extraInfo) {return DialogueAsset.CODEC.decode(bsonValue, extraInfo);}
         public BsonValue encode(DialogueAsset dialogueAsset, ExtraInfo extraInfo) {return DialogueAsset.CODEC.encode(dialogueAsset, extraInfo);}
     }

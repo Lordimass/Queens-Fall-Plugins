@@ -3,7 +3,7 @@ plugins {
     java
     alias(libs.plugins.hytaleTools)
     alias(libs.plugins.hytalePublisher)
-    id("com.gradleup.shadow") version "8.3.6"
+    id("com.gradleup.shadow") version "9.4.2"
 }
 
 // Plugin versions are sourced from gradle/libs.versions.toml.
@@ -26,13 +26,11 @@ dependencies {
 
     // CurseMaven Hytale Libraries
     implementation("curse.maven:hyui-1431415:8151837")
-    implementation("curse.maven:creditor-1560961:8187845")
+    implementation("curse.maven:creditor-1560961:8334074")
 
     // Lombok
     compileOnly("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")
-    testCompileOnly("org.projectlombok:lombok:$lombokVersion")
-    testAnnotationProcessor("org.projectlombok:lombok:$lombokVersion")
 }
 
 hytaleTools {

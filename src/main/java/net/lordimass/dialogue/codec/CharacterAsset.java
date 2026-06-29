@@ -63,7 +63,7 @@ public class CharacterAsset implements JsonAssetWithMap<String, DefaultAssetMap<
             (asset, data) -> asset.extraData = data,
             asset -> asset.extraData
         );
-    private static AssetStore<String, CharacterAsset, DefaultAssetMap<String, CharacterAsset>> ASSET_STORE;
+    private static AssetStore<String, CharacterAsset, DefaultAssetMap<String, CharacterAsset>> assetStore;
     private AssetExtraInfo.Data extraData;
 
     @Getter private String id;
@@ -75,8 +75,8 @@ public class CharacterAsset implements JsonAssetWithMap<String, DefaultAssetMap<
     protected CharacterAsset() {};
 
     public static AssetStore<String, CharacterAsset, DefaultAssetMap<String, CharacterAsset>> getAssetStore() {
-        if (ASSET_STORE == null) ASSET_STORE = AssetRegistry.getAssetStore(CharacterAsset.class);
-        return ASSET_STORE;
+        if (assetStore == null) assetStore = AssetRegistry.getAssetStore(CharacterAsset.class);
+        return assetStore;
     }
 
     public static DefaultAssetMap<String, DialogueAsset> getAssetMap() {
