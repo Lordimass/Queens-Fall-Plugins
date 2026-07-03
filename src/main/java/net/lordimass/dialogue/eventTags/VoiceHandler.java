@@ -1,4 +1,4 @@
-package net.lordimass.dialogue.system;
+package net.lordimass.dialogue.eventTags;
 
 import com.hypixel.hytale.protocol.SoundCategory;
 import com.hypixel.hytale.server.core.asset.type.soundevent.config.SoundEvent;

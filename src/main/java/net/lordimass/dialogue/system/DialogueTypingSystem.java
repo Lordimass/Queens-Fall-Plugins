@@ -12,6 +12,7 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import lombok.Getter;
 import net.lordimass.dialogue.DialogueMod;
+import net.lordimass.dialogue.eventTags.VoiceHandler;
 import net.lordimass.dialogue.parameter.ParameterRegister;
 import net.lordimass.dialogue.parameter.eventTag.EventTagParameterContext;
 import net.lordimass.dialogue.ui.DialoguePageManager;

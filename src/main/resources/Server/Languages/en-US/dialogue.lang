@@ -6,7 +6,7 @@ Hans.name = <color is="#2ead58">Hans</color>
 
 IntroDialogue01.content.0 = <color is="#777777">Uh</color><color is="#999999">...</color> \n Do I know you?<sound is="Voice_Effect_Question">
 
-IntroDialogue02.content.0 = Did you hit your head on a rock
+IntroDialogue02.content.0 = Did you hit your head on a rock<command is="say I can run commands too!">
 IntroDialogue02.content.1 = or do you have a screw loose?!<sound is="Voice_Effect_Shock">
 IntroDialogue02.content.3 = It's me, your old pal Hans!<sound is="Voice_Effect_Exclamation">
 

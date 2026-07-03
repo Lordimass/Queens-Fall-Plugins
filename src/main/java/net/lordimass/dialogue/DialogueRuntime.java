@@ -13,6 +13,7 @@ import net.lordimass.dialogue.action.builder.BuilderActionBeginDialogue;
 import net.lordimass.dialogue.codec.CharacterAsset;
 import net.lordimass.dialogue.codec.DialogueAsset;
 import net.lordimass.dialogue.component.NPCDialogueComponent;
+import net.lordimass.dialogue.eventTags.RunCommand;
 import net.lordimass.dialogue.ui.DialoguePageManager;
 import net.lordimass.dialogue.player.DialoguePlayer;
 import net.lordimass.dialogue.player.DialoguePlayerConfig;
@@ -20,7 +21,7 @@ import net.lordimass.dialogue.player.commands.DialogueCommand;
 import net.lordimass.dialogue.sensor.builder.BuilderSensorDialogue;
 import net.lordimass.dialogue.system.DialogueAnimationSystem;
 import net.lordimass.dialogue.system.DialogueTypingSystem;
-import net.lordimass.dialogue.system.VoiceHandler;
+import net.lordimass.dialogue.eventTags.VoiceHandler;
 
 import java.io.File;
 import java.util.Map;
@@ -49,6 +50,7 @@ public class DialogueRuntime {
         registerReplacementParameter("{lang}", PlayerRef.class, PlayerRef::getLanguage);
 
         registerEventTag("sound", DialoguePageManager.class, VoiceHandler::playSoundEvent, new String[]{"is"});
+        registerEventTag("command", PlayerRef.class, RunCommand::runCommandEvent, new String[]{"is"});
 
         DialogueMod.dialogueComponentType = host.getEntityStoreRegistry().registerComponent(NPCDialogueComponent.class, NPCDialogueComponent::new);
 
