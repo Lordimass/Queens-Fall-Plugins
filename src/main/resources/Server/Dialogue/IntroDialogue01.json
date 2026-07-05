@@ -6,6 +6,7 @@
     }
   ],
   "Character": "Player",
+  "Do": "<command is=\"say Hello {username}! You hit 'Next' on IntroDialogue01 :D\">",
   "Next": {
     "BlockIdentifier": "IntroDialogue02",
     "Type": "Dialogue",
@@ -23,5 +24,5 @@
       }
     ],
     "NextId": "IntroDialogue03"
-  }
+  } 
 }

@@ -18,7 +18,8 @@
     },
     {
       "Content": "dialogue.IntroDialogue03.content.1",
-      "NextId": "IntroDialogue03_C02"
+      "NextId": "IntroDialogue03_C02",
+      "Do": "<command is=\"say You chose option 2 on IntroDialogue03\">"
     },
     {
       "Content": "dialogue.IntroDialogue03.content.2"

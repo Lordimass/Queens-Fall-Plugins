@@ -34,14 +34,19 @@ public class DialogueEntry {
             )
             .documentation("Only applicable if this is an entry of a `Choice` dialogue. The next dialogue to open when this entry is picked. Use `NextId` instead to reference a separate dialogue asset instead of inlining it here.")
             .add()
+            .append(new KeyedCodec<>("Do", Codec.STRING),
+                (obj, val) -> obj.doAfter = val,
+                obj -> obj.doAfter
+            )
+            .documentation("Do something after the player clicks \"Next\" on this dialogue." +
+                "This should contain an event tag string, like `<command is=\"say Hello World!\">`")
+            .add()
             .build();
 
-    @Getter
-    private String content;
-    @Nullable
-    private String nextId;
-    @Nullable
-    private DialogueAsset next;
+    @Getter private String content;
+    @Nullable private String nextId;
+    @Nullable private DialogueAsset next;
+    @Getter @Nullable private String doAfter;
 
     public DialogueEntry(String content, @Nullable String nextId) {
         this.content = content;

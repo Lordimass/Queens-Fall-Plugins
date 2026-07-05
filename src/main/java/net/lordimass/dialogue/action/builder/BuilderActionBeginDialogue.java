@@ -8,7 +8,7 @@ import com.hypixel.hytale.server.npc.asset.builder.holder.AssetHolder;
 import com.hypixel.hytale.server.npc.corecomponents.builders.BuilderActionBase;
 import com.hypixel.hytale.server.npc.instructions.Action;
 import net.lordimass.dialogue.action.ActionBeginDialogue;
-import net.lordimass.dialogue.codec.validator.DialogExistsValidator;
+import net.lordimass.dialogue.codec.validator.DialogueExistsValidator;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -43,7 +43,7 @@ public class BuilderActionBeginDialogue extends BuilderActionBase {
 
     @Nonnull
     public BuilderActionBeginDialogue readConfig(@Nonnull JsonElement data) {
-        this.requireAsset(data, "Dialogue", this.dialogueId, DialogExistsValidator.required(), BuilderDescriptorState.Stable, "The dialogue to begin", null);
+        this.requireAsset(data, "Dialogue", this.dialogueId, DialogueExistsValidator.required(), BuilderDescriptorState.Stable, "The dialogue to begin", null);
         this.requireInstructionType(EnumSet.of(InstructionType.Interaction));
         return this;
     }

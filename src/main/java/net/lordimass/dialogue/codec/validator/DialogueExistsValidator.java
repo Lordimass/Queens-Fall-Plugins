@@ -6,23 +6,23 @@ import net.lordimass.dialogue.codec.DialogueAsset;
 import javax.annotation.Nonnull;
 import java.util.EnumSet;
 
-public class DialogExistsValidator extends AssetValidator {
-    private static final DialogExistsValidator DEFAULT_INSTANCE = new DialogExistsValidator();
+public class DialogueExistsValidator extends AssetValidator {
+    private static final DialogueExistsValidator DEFAULT_INSTANCE = new DialogueExistsValidator();
 
-    private DialogExistsValidator() {
+    private DialogueExistsValidator() {
     }
 
-    private DialogExistsValidator(EnumSet<Config> config) {
+    private DialogueExistsValidator(EnumSet<Config> config) {
         super(config);
     }
 
-    public static DialogExistsValidator required() {
+    public static DialogueExistsValidator required() {
         return DEFAULT_INSTANCE;
     }
 
     @Nonnull
-    public static DialogExistsValidator withConfig(EnumSet<Config> config) {
-        return new DialogExistsValidator(config);
+    public static DialogueExistsValidator withConfig(EnumSet<Config> config) {
+        return new DialogueExistsValidator(config);
     }
 
     @Override

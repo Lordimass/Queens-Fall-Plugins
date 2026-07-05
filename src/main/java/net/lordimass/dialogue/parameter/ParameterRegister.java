@@ -1,11 +1,15 @@
 package net.lordimass.dialogue.parameter;
 
+import com.hypixel.hytale.component.Ref;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
 import lombok.Getter;
+import net.lordimass.dialogue.DialogueMod;
 import net.lordimass.dialogue.parameter.eventTag.EventTagParameterContext;
 import net.lordimass.dialogue.parameter.eventTag.EventTagProcessor;
 import net.lordimass.dialogue.parameter.eventTag.EventTagResolver;
 import net.lordimass.dialogue.parameter.replacementParameter.ReplacementParameterProcessor;
 import net.lordimass.dialogue.parameter.replacementParameter.ReplacementParameterResolver;
+import net.lordimass.dialogue.ui.DialoguePageManager;
 
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -53,5 +57,14 @@ public final class ParameterRegister {
             };
         }
         return false;
+    }
+
+    public static boolean processEventTag(DialoguePageManager pageManager, String token) {
+        EventTagParameterContext ctx = new EventTagParameterContext(token);
+        ctx.put(Ref.class, pageManager.getNpcRef());
+        ctx.put(PlayerRef.class, pageManager.getPlayerRef());
+        ctx.put(DialogueMod.class, DialogueMod.get());
+        ctx.put(DialoguePageManager.class, pageManager);
+        return ParameterRegister.processEventTag(ctx);
     }
 }

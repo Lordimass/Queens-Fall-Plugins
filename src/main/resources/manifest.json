@@ -1,7 +1,7 @@
 {
     "Group": "net.lordimass",
     "Name": "Dialogue",
-    "Version": "1.4.2",
+    "Version": "1.5.0",
     "Description": "Allows server owners and modders to add custom dialogue and interactivity to any NPC.",
     "Authors": [
         {

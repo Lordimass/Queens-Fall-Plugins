@@ -1,2 +1,2 @@
-Added the `<command>` inline event tag which can be used to run commands from the server console. See documentation for 
-more details.
+Added "Do" option to dialogues and dialogue entries. This allows you to trigger an event tag after the player clicks
+'Next' or chooses a particular option from a choice dialogue. 

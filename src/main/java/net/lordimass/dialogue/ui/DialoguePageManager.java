@@ -12,12 +12,15 @@ import lombok.Getter;
 import net.lordimass.dialogue.codec.DialogueAsset;
 import net.lordimass.dialogue.codec.DialogueEntry;
 import net.lordimass.dialogue.component.NPCDialogueComponent;
+import net.lordimass.dialogue.parameter.ParameterRegister;
 import net.lordimass.dialogue.system.DialogueTypingSystem;
+import net.lordimass.dialogue.util.TokenString;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
+import static net.lordimass.dialogue.util.TranslationUtils.translate;
 import static net.lordimass.dialogue.util.TranslationUtils.translateWithHYUIML;
 
 public class DialoguePageManager {
@@ -107,6 +110,7 @@ public class DialoguePageManager {
                 .setVariable("choice"+i, content)
                 .setVariable("choice"+i+"Display", "block");
             builder.addEventListener("choice"+i, CustomUIEventBindingType.Activating, _ -> {
+                handleDoAfter(entry.getDoAfter());
                 if (entry.getNext() == null) {close();return;}
                 openDialogue(entry.getNext());
             });
@@ -120,6 +124,7 @@ public class DialoguePageManager {
             .setVariable("nextButtonText", isNextExists ? "NEXT" : "CLOSE");
         hyUIPage.updatePage(false);
         builder.addEventListener("next-button", CustomUIEventBindingType.Activating, _ -> {
+            handleDoAfter(dialogue.getDoAfter());
             if (isNextExists) openDialogue(dialogue.getNext());
             else close();
         });
@@ -130,6 +135,16 @@ public class DialoguePageManager {
         int index = DialogueTypingSystem.tickingPageManagers.indexOf(this);
         if (index >= 0) {
             DialogueTypingSystem.tickingPageManagers.remove(index);
+        }
+    }
+
+    private void handleDoAfter(@Nullable String doAfter) {
+        if (doAfter == null) return;
+        String placeholdersHandled = translateWithHYUIML(doAfter, playerRef);
+        TokenString tokenised = new TokenString(placeholdersHandled);
+        while (!tokenised.isComplete()) {
+            String token = tokenised.next();
+            ParameterRegister.processEventTag(this, token);
         }
     }
 

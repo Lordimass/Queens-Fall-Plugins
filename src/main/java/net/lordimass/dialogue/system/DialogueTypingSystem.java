@@ -11,10 +11,7 @@ import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import lombok.Getter;
-import net.lordimass.dialogue.DialogueMod;
 import net.lordimass.dialogue.eventTags.VoiceHandler;
-import net.lordimass.dialogue.parameter.ParameterRegister;
-import net.lordimass.dialogue.parameter.eventTag.EventTagParameterContext;
 import net.lordimass.dialogue.ui.DialoguePageManager;
 import net.lordimass.dialogue.util.TokenString;
 import org.jspecify.annotations.NonNull;
@@ -25,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static net.lordimass.dialogue.parameter.ParameterRegister.processEventTag;
 
 /**
  * Handles the typewriter effect for any dialogues added to its <code>tickingPageManagers</code>
@@ -76,15 +75,6 @@ public class DialogueTypingSystem extends DelayedEntitySystem<EntityStore> {
         hyUIPage.getTemplateProcessor()
             .setVariable("content", content);
         hyUIPage.updatePage(false);
-    }
-
-    private static boolean processEventTag(DialoguePageManager pageManager, String token) {
-        EventTagParameterContext ctx = new EventTagParameterContext(token);
-        ctx.put(Ref.class, pageManager.getNpcRef());
-        ctx.put(PlayerRef.class, pageManager.getPlayerRef());
-        ctx.put(DialogueMod.class, DialogueMod.get());
-        ctx.put(DialoguePageManager.class, pageManager);
-        return ParameterRegister.processEventTag(ctx);
     }
 
     @Override

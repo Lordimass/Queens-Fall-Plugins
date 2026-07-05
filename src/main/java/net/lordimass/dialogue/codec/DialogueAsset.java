@@ -96,6 +96,13 @@ public class DialogueAsset implements JsonAssetWithMap<String, DefaultAssetMap<S
             .documentation("A unique identifier for this specific dialogue block. If left " +
                 "undefined, it will default to the ID of the asset (i.e. the JSON file name).")
             .add()
+            .append(new KeyedCodec<>("Do", Codec.STRING),
+                (obj, val) -> obj.doAfter = val,
+                obj -> obj.doAfter
+                )
+            .documentation("Do something after the player clicks \"Next\" on this dialogue." +
+                "This should contain an event tag string, like `<command is=\"say Hello World!\">`")
+            .add()
             .build();
 
 
@@ -121,7 +128,8 @@ public class DialogueAsset implements JsonAssetWithMap<String, DefaultAssetMap<S
     private String characterId;
     private CharacterAsset character;
     private String character2Id;
-    private CharacterAsset character2;
+    @Nullable private CharacterAsset character2;
+    @Getter @Nullable private String doAfter;
 
     protected DialogueAsset() {}
 
