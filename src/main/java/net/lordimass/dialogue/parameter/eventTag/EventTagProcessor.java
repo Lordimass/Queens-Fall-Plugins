@@ -45,6 +45,7 @@ public final class EventTagProcessor<C> extends ParameterProcessor<C> {
     public String resolve(ParameterContext ctx) {
         EventTagParameterContext eCtx = EventTagParameterContext.parameterContextAs(ctx);
         Map<String, String> params = new HashMap<>();
+        if (eCtx.token == null) return null;
         Matcher matcher  = this.pattern.matcher(eCtx.token);
         if (!matcher.matches() || !ctx.has(contextType)) return null;
         for (String param : matcher.namedGroups().keySet()) {

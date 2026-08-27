@@ -5,6 +5,7 @@ import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.npc.corecomponents.SensorBase;
+import com.hypixel.hytale.server.npc.instructions.ExecutionSupport;
 import com.hypixel.hytale.server.npc.role.Role;
 import com.hypixel.hytale.server.npc.sensorinfo.InfoProvider;
 import net.lordimass.dialogue.component.NPCDialogueComponent;
@@ -24,10 +25,7 @@ public class SensorDialogue extends SensorBase {
     }
 
     @Override
-    public boolean matches(@Nonnull Ref<EntityStore> ref,
-                           @Nonnull Role role,
-                           double dt,
-                           @Nonnull Store<EntityStore> store) {
+    public boolean matches(@Nonnull Ref<EntityStore> ref, @Nonnull ExecutionSupport executionSupport, double dt, @Nonnull Store<EntityStore> store) {
         NPCDialogueComponent npcDialogueComponent = NPCDialogueComponent.get(ref, store);
         if (npcDialogueComponent == null) {
             return blockId == null || blockId.isEmpty();

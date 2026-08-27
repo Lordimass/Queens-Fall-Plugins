@@ -1,3 +1,5 @@
+import org.gradle.internal.snapshot.impl.ArrayOfPrimitiveValueSnapshot
+
 plugins {
     idea
     java
@@ -73,7 +75,16 @@ hytalePublisher {
         projectId = property("curseforge_project_id").toString()
 
         embeddedLibrary("hyui")
-        embeddedLibrary("creditor")
+        required("creditor")
+    }
+
+    modifold {
+        enabled = true
+        projectId = property("modifold_project_id").toString()
+        gameVersions = listOf(property("hytale_version").toString())
+        loaders = listOf("Vanilla")
+
+        optional("Cpvw9Q")
     }
 }
 

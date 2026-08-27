@@ -6,6 +6,7 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.npc.asset.builder.BuilderSupport;
 import com.hypixel.hytale.server.npc.corecomponents.ActionBase;
+import com.hypixel.hytale.server.npc.instructions.ExecutionSupport;
 import com.hypixel.hytale.server.npc.role.Role;
 import com.hypixel.hytale.server.npc.sensorinfo.InfoProvider;
 import net.lordimass.dialogue.action.builder.BuilderActionBeginDialogue;
@@ -13,6 +14,7 @@ import net.lordimass.dialogue.codec.DialogueAsset;
 import net.lordimass.dialogue.ui.DialoguePageManager;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class ActionBeginDialogue extends ActionBase {
     protected final String dialogueId;
@@ -23,25 +25,23 @@ public class ActionBeginDialogue extends ActionBase {
     }
 
     @Override
-    public boolean canExecute(@Nonnull Ref<EntityStore> ref, @Nonnull Role role, InfoProvider sensorInfo, double dt, @Nonnull Store<EntityStore> store) {
-        return super.canExecute(ref, role, sensorInfo, dt, store) && role.getStateSupport().getInteractionIterationTarget() != null;
+    public boolean canExecute(@Nonnull Ref<EntityStore> ref, @Nonnull ExecutionSupport executionSupport, @Nullable InfoProvider sensorInfo, double dt, @Nonnull Store<EntityStore> store) {
+        return super.canExecute(ref, executionSupport, sensorInfo, dt, store) && executionSupport.getStateSupport().getInteractionIterationTarget() != null;
     }
 
     @Override
-    public boolean execute(@Nonnull Ref<EntityStore> ref, @Nonnull Role role, InfoProvider sensorInfo, double dt, @Nonnull Store<EntityStore> store) {
-        if (canExecute(ref, role, sensorInfo, dt, store)) {
-            Ref<EntityStore> playerReference = role.getStateSupport().getInteractionIterationTarget();
-            if (playerReference == null) return false;
+    public boolean execute(@Nonnull Ref<EntityStore> ref, @Nonnull ExecutionSupport executionSupport, @Nullable InfoProvider sensorInfo, double dt, @Nonnull Store<EntityStore> store) {
+        if (!canExecute(ref, executionSupport, sensorInfo, dt, store)) return false;
 
-            PlayerRef playerRef = store.getComponent(playerReference, PlayerRef.getComponentType());
-            if (playerRef == null) return false;
+        Ref<EntityStore> playerReference = executionSupport.getStateSupport().getInteractionIterationTarget();
+        if (playerReference == null) return false;
 
-            new DialoguePageManager(playerRef, ref, DialogueAsset.getAsset(this.dialogueId));
+        PlayerRef playerRef = store.getComponent(playerReference, PlayerRef.getComponentType());
+        if (playerRef == null) return false;
 
-            super.execute(ref, role, sensorInfo, dt, store);
-            return true;
-        }
-        return false;
+        new DialoguePageManager(playerRef, ref, DialogueAsset.getAsset(this.dialogueId));
+
+        super.execute(ref, executionSupport, sensorInfo, dt, store);
+        return true;
     }
-
 }
